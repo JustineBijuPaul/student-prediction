@@ -82,44 +82,106 @@ def add_picture_if_room(slide, path: Path, left, top, width, height) -> None:
 
 
 def create_architecture_diagram(path: Path) -> None:
-    """Create a simple agent architecture diagram for slide 7."""
+    """Create a complete agent architecture diagram with all components and feedback loops."""
     import matplotlib.pyplot as plt
-    from matplotlib.patches import FancyBboxPatch
+    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
-    fig, ax = plt.subplots(figsize=(10, 4))
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 4)
+    fig, ax = plt.subplots(figsize=(14, 7))
+    ax.set_xlim(0, 14)
+    ax.set_ylim(0, 7)
     ax.axis("off")
+    ax.set_facecolor("#fafafa")
 
-    boxes = [
-        (0.3, 1.5, "Sensors\n(SIS, Attendance)"),
-        (2.0, 1.5, "Percepts\n(Student Record)"),
-        (3.7, 1.5, "Preprocessor"),
-        (5.4, 1.5, "Random Forest\n(Learning)"),
-        (7.1, 1.5, "Decision\nEngine"),
-        (8.8, 1.5, "Teacher\nDashboard"),
-    ]
-    colors = ["#3498db", "#9b59b6", "#1abc9c", "#e67e22", "#e74c3c", "#27ae60"]
-    for (x, y, label), color in zip(boxes, colors):
-        box = FancyBboxPatch(
-            (x, y), 1.4, 1.0,
-            boxstyle="round,pad=0.05,rounding_size=0.1",
-            linewidth=1.5, edgecolor="#2c3e50", facecolor=color, alpha=0.85,
+    def box(x, y, w, h, label, color, fontsize=8.5):
+        patch = FancyBboxPatch(
+            (x, y), w, h,
+            boxstyle="round,pad=0.04,rounding_size=0.12",
+            linewidth=1.8, edgecolor="#2c3e50", facecolor=color, alpha=0.92,
         )
-        ax.add_patch(box)
-        ax.text(x + 0.7, y + 0.5, label, ha="center", va="center",
-                fontsize=9, color="white", fontweight="bold")
+        ax.add_patch(patch)
+        ax.text(x + w / 2, y + h / 2, label, ha="center", va="center",
+                fontsize=fontsize, color="white", fontweight="bold", linespacing=1.25)
 
-    for x in [1.7, 3.4, 5.1, 6.8, 8.5]:
-        ax.annotate("", xy=(x + 0.3, 2.0), xytext=(x, 2.0),
-                    arrowprops=dict(arrowstyle="->", color="#2c3e50", lw=2))
+    def arrow(x1, y1, x2, y2, style="-|>", color="#2c3e50", lw=1.8, connection="arc3"):
+        ax.add_patch(FancyArrowPatch(
+            (x1, y1), (x2, y2),
+            arrowstyle=style, color=color, lw=lw,
+            connectionstyle=connection, mutation_scale=14,
+        ))
 
-    ax.text(5, 3.3, "Student Performance Prediction Agent Architecture",
-            ha="center", fontsize=14, fontweight="bold", color="#2c3e50")
-    ax.text(7.1, 0.6, "Knowledge Base + Memory", ha="center", fontsize=9, color="#7f8c8d")
+    # Title
+    ax.text(7, 6.55, "Student Performance Prediction Agent — Full Architecture",
+            ha="center", fontsize=15, fontweight="bold", color="#2c3e50")
+    ax.text(7, 6.15, "Perceive → Learn → Reason → Act  (Russell & Norvig Intelligent Agent)",
+            ha="center", fontsize=10, color="#7f8c8d", style="italic")
+
+    # --- Main pipeline (top row) ---
+    bw, bh = 1.55, 1.05
+    y_main = 4.35
+    pipeline = [
+        (0.4, "Sensors\n(SIS · LMS ·\nAttendance)"),
+        (2.25, "Percepts\n(Student\nFeature Vector)"),
+        (4.1, "Preprocessor\n(Scale · Encode)"),
+        (5.95, "Random Forest\n(Learning\nComponent)"),
+        (7.8, "Decision\nEngine\n(Risk + Rules)"),
+    ]
+    colors_main = ["#2980b9", "#8e44ad", "#16a085", "#d35400", "#c0392b"]
+    for (x, label), color in zip(pipeline, colors_main):
+        box(x, y_main, bw, bh, label, color)
+
+    # Actuators (right column)
+    actuators = [
+        (9.85, 5.15, "Teacher\nDashboard"),
+        (9.85, 4.0, "Notifications\n(Counselor · Parent)"),
+        (9.85, 2.85, "Recommendations\n(Tutoring · Study Plan)"),
+    ]
+    colors_act = ["#27ae60", "#2ecc71", "#1e8449"]
+    for (x, y, label), color in zip(actuators, colors_act):
+        box(x, y, bw, bh, label, color)
+
+    # Support components (bottom row)
+    box(3.2, 1.35, 2.2, 1.05, "Knowledge Base\n(Thresholds ·\nIntervention Rules)", "#34495e")
+    box(6.1, 1.35, 2.2, 1.05, "Memory\n(Prediction History\nper Student)", "#5d6d7e")
+
+    # Environment label
+    box(0.35, 5.75, 1.55, 0.55, "Environment\n(School)", "#95a5a6", fontsize=8)
+    arrow(1.1, 5.75, 1.1, 5.4)
+
+    # Main flow arrows
+    arrow(1.95, y_main + bh / 2, 2.25, y_main + bh / 2)
+    arrow(3.8, y_main + bh / 2, 4.1, y_main + bh / 2)
+    arrow(5.65, y_main + bh / 2, 5.95, y_main + bh / 2)
+    arrow(7.5, y_main + bh / 2, 7.8, y_main + bh / 2)
+    arrow(9.35, y_main + bh / 2, 9.85, y_main + bh / 2 + 0.35)
+
+    # Decision engine → actuators
+    arrow(8.575, y_main, 9.85, 5.7, connection="arc3,rad=0.15")
+    arrow(8.575, y_main + 0.2, 9.85, 4.55, connection="arc3,rad=0.1")
+    arrow(8.575, y_main, 9.85, 3.4, connection="arc3,rad=-0.15")
+
+    # Knowledge base → decision engine
+    arrow(4.3, 2.4, 8.2, 4.35, connection="arc3,rad=-0.2", color="#34495e")
+    ax.text(5.8, 3.35, "rules", fontsize=8, color="#34495e", style="italic")
+
+    # Random forest ↔ knowledge (training context)
+    arrow(6.72, 4.35, 5.5, 2.4, connection="arc3,rad=0.25", color="#7f8c8d", style="-|>")
+    ax.text(6.0, 3.55, "beliefs", fontsize=8, color="#7f8c8d", style="italic")
+
+    # Memory ↔ decision engine
+    arrow(7.2, 2.4, 8.0, 4.35, connection="arc3,rad=0.2", color="#5d6d7e")
+    arrow(8.0, 4.35, 7.2, 2.4, connection="arc3,rad=0.35", color="#5d6d7e", style="-|>")
+
+    # Feedback loop: dashboard → memory
+    arrow(10.6, 2.85, 7.2, 2.4, connection="arc3,rad=-0.35", color="#e67e22", lw=2)
+    ax.text(9.2, 2.15, "feedback loop", fontsize=8, color="#e67e22", fontweight="bold")
+
+    # Legend
+    legend_y = 0.35
+    ax.text(0.4, legend_y, "● Sensors/Actuators   ● Cognition   ● Learning   ● Support",
+            fontsize=8.5, color="#566573")
 
     path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(path, dpi=150, bbox_inches="tight", facecolor="white")
+    fig.savefig(path, dpi=180, bbox_inches="tight", facecolor="white", pad_inches=0.25)
     plt.close(fig)
 
 
@@ -358,10 +420,10 @@ def build() -> Path:
     add_picture_if_room(
         s7,
         arch_path,
-        Inches(0.35),
-        Inches(3.5),
-        Inches(9.0),
-        Inches(1.6),
+        Inches(0.25),
+        Inches(3.35),
+        Inches(9.3),
+        Inches(2.1),
     )
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
