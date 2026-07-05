@@ -61,14 +61,14 @@ Key numeric features (combined dataset):
 
 ## 5. Target Distribution (Performance Categories)
 
-| Category | G3 Range | Approx. % |
-|----------|----------|-----------|
-| Low | 0–9 | ~15% |
-| Medium | 10–13 | ~35% |
-| High | 14–20 | ~50% |
+| Category | G3 Range | Approx. Count | Approx. % |
+|----------|----------|---------------|-----------|
+| Low | 0–9 | 230 | 22.0% |
+| Medium | 10–13 | 520 | 49.8% |
+| High | 14–20 | 294 | 28.2% |
 
 ### Class Imbalance Analysis
-The **Low** category is underrepresented (~15%). Mitigation strategies:
+The **Low** category is underrepresented (22.0%). Mitigation strategies:
 - `class_weight='balanced_subsample'` in Random Forest
 - Stratified train/test split
 - Focus on **recall** for Low class in evaluation

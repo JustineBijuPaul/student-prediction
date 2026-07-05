@@ -121,7 +121,7 @@ Mean final grade G3 ≈ 11.9 (σ ≈ 3.2). Mean absences ≈ 5.5 with heavy righ
 Strong positive correlation between G1, G2, and G3 (r > 0.8). Negative correlation between failures and G3 (r ≈ -0.35). Weak negative correlation between absences and G3.
 
 ## 5.4 Class Distribution
-Approximately 15% Low, 35% Medium, 50% High — moderate imbalance favoring higher performers.
+Approximately 22% Low, 50% Medium, 28% High — moderate imbalance with Medium as the largest class.
 
 ## 5.5 Visualizations
 Generated in `outputs/`:
@@ -172,7 +172,7 @@ Seven algorithms evaluated:
 
 **Selection criterion:** Weighted F1 score on held-out test set (balances precision/recall under class imbalance).
 
-**Winner:** Random Forest (F1 ≈ 0.86, Accuracy ≈ 0.86, ROC AUC ≈ 0.95)
+**Winner:** Random Forest (F1 = 0.8615, Accuracy = 0.8612, ROC AUC = 0.9461)
 
 ---
 
@@ -211,12 +211,35 @@ Execute via: `python main.py --train`
 | CV Accuracy (5-fold) | 0.8467 ± 0.0195 |
 
 ## 9.2 Model Comparison
-Full table saved to `outputs/model_comparison.csv`. Random Forest and Logistic Regression lead; Extra Trees underperforms due to excessive randomization on this feature space.
 
-## 9.3 Feature Importance
+| Model | Accuracy | F1 Score | ROC AUC |
+|-------|----------|----------|---------|
+| **Random Forest** | **0.8612** | **0.8615** | **0.9461** |
+| Logistic Regression | 0.8517 | 0.8516 | 0.9500 |
+| XGBoost | 0.8469 | 0.8468 | 0.9546 |
+| Decision Tree | 0.8469 | 0.8467 | 0.9356 |
+| Gradient Boosting | 0.8373 | 0.8371 | 0.9514 |
+| Support Vector Machine | 0.8230 | 0.8220 | 0.9342 |
+| Extra Trees | 0.7560 | 0.7525 | 0.8931 |
+
+Full table saved to `outputs/model_comparison.csv`. Random Forest leads on F1; Logistic Regression and XGBoost are close runners-up.
+
+## 9.3 Teacher Dashboard (1,044 Students)
+
+| Output | Count |
+|--------|-------|
+| HIGH intervention priority | 233 |
+| MEDIUM intervention priority | 525 |
+| LOW intervention priority | 286 |
+| Critical risk | 270 |
+| Moderate risk | 488 |
+
+Generated via `python main.py --dashboard` → `outputs/teacher_dashboard.csv`
+
+## 9.4 Feature Importance
 Top features: G2, G1, failures, absences, studytime, parental education. Confirms academic history dominates prediction.
 
-## 9.4 Confusion Matrix
+## 9.5 Confusion Matrix
 Strong diagonal performance. Primary confusion at Medium/High boundary — expected given continuous G3 discretization at thresholds 10 and 14.
 
 ---
@@ -349,7 +372,7 @@ This project demonstrates that **Artificial Intelligence** in educational contex
 
 - Rigorous **data analysis** of 1,044 student records
 - Comparative **machine learning** evaluation of seven algorithms
-- A **Random Forest learning component** achieving 86% F1 score
+- A **Random Forest learning component** achieving 86.15% F1 score on the test set
 - Complete **agent architecture** with perception, reasoning, and action
 - Formal **environment characterization** per Russell & Norvig
 

@@ -73,7 +73,7 @@ Agent icon + school illustration. Include university logo.
 | 17 | F | 4 | 0 | 2 | 15 | 14 | 15 | High |
 
 ### Problems Identified
-- Class imbalance (Low ≈ 15%)
+- Class imbalance (Low 22%, Medium 50%, High 28%)
 - Outliers in absences (max 93)
 - Self-reported behavioral features
 - 382 students overlap between Math and Portuguese files
@@ -136,15 +136,15 @@ Student Features → StandardScaler + OneHotEncoder → Random Forest (200 trees
 
 ### Model Comparison (insert `outputs/model_comparison.png`)
 
-| Model | F1 Score |
-|-------|----------|
-| **Random Forest** | **0.861** |
-| Logistic Regression | 0.852 |
-| XGBoost | 0.847 |
-| Decision Tree | 0.847 |
-| Gradient Boosting | 0.837 |
-| SVM | 0.822 |
-| Extra Trees | 0.753 |
+| Model | F1 Score | Accuracy |
+|-------|----------|----------|
+| **Random Forest** | **0.8615** | **0.8612** |
+| Logistic Regression | 0.8516 | 0.8517 |
+| XGBoost | 0.8468 | 0.8469 |
+| Decision Tree | 0.8467 | 0.8469 |
+| Gradient Boosting | 0.8371 | 0.8373 |
+| SVM | 0.8220 | 0.8230 |
+| Extra Trees | 0.7525 | 0.7560 |
 
 ### Why Best?
 Highest F1, stable CV, handles mixed features, provides feature importance.
@@ -166,6 +166,7 @@ Highest F1, stable CV, handles mixed features, provides feature importance.
 | **F1 Score** | 86.15% |
 | **ROC AUC** | 94.61% |
 | **CV Accuracy** | 84.67% ± 1.95% |
+| **Train / Test split** | 835 / 209 students |
 
 ### Confusion Matrix
 Insert: `outputs/confusion_matrix.png`
@@ -177,7 +178,7 @@ Insert: `outputs/feature_importance.png`
 1. G2 (second period grade) is the #1 predictor
 2. Main errors at Medium ↔ High boundary (grades 13–14)
 3. Model catches majority of Low performers — critical for intervention
-4. Training time: 0.46s | Prediction: 45ms (scalable to full school)
+4. Training time: 0.52s | Prediction: 46ms (scalable to full school)
 
 ---
 
@@ -192,8 +193,8 @@ Percept → Preprocess → ML Probabilities → Risk Assessment → Intervention
 ```
 
 ### Real-World Use
-- **Teacher Dashboard:** Batch-scores class; flags HIGH priority students
-- **Notifications:** Alerts counselor when risk = Critical
+- **Teacher Dashboard:** Scores all **1,044 students**; **233 HIGH priority**, 525 MEDIUM, 286 LOW
+- **Notifications:** Alerts counselor when risk = Critical (270 students)
 - **Recommendations:** Tutoring, counseling, parent meetings based on category + features
 
 ### Agent Components

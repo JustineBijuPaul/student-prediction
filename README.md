@@ -56,11 +56,23 @@ python main.py --dashboard
 
 | Metric    | Random Forest |
 |-----------|---------------|
-| Accuracy  | ~86%          |
-| F1 Score  | ~86%          |
-| ROC AUC   | ~95%          |
+| Accuracy  | 86.12%        |
+| Precision | 86.36%        |
+| Recall    | 86.12%        |
+| F1 Score  | 86.15%        |
+| ROC AUC   | 94.61%        |
+| CV Accuracy | 84.67% ± 1.95% |
 
-*Exact values depend on train/test split; see `outputs/model_comparison.csv`.*
+*Training set: 835 students | Test set: 209 students | See `outputs/model_comparison.csv`.*
+
+## Teacher Dashboard (Full Cohort)
+
+| Output | Count |
+|--------|-------|
+| **Total students scored** | **1,044** |
+| HIGH priority (urgent) | 233 |
+| MEDIUM priority (monitor) | 525 |
+| LOW priority (on track) | 286 |
 
 ## AI Agent Architecture
 

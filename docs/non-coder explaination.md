@@ -26,19 +26,27 @@ When the teacher runs the dashboard, the system scores **all 1,044 students** an
 
 | Predicted performance | Students | What it means |
 |----------------------|----------|---------------|
-| **Low** (at risk) | **225** | May need urgent help |
-| **Medium** (watch list) | **538** | Should be monitored |
-| **High** (doing well) | **281** | On track |
+| **Low** (at risk) | **233** | May need urgent help |
+| **Medium** (watch list) | **525** | Should be monitored |
+| **High** (doing well) | **286** | On track |
 
 ### Intervention priority (what the teacher should focus on first)
 
 | Priority | Students | Teacher action |
 |----------|----------|----------------|
-| **HIGH** | **225** | Act soon — counseling, tutoring, parent contact |
-| **MEDIUM** | **538** | Monitor weekly, study plans |
-| **LOW** | **281** | Maintain support, offer enrichment |
+| **HIGH** | **233** | Act soon — counseling, tutoring, parent contact |
+| **MEDIUM** | **525** | Monitor weekly, study plans |
+| **LOW** | **286** | Maintain support, offer enrichment |
 
-So if a teacher asks *“How many students do I have?”* — in this demo: **1,044 total**, with **225 flagged as high priority** for intervention.
+### Actual final grades in the dataset (ground truth)
+
+| Category | Students | Percent |
+|----------|----------|---------|
+| Low (G3 &lt; 10) | 230 | 22.0% |
+| Medium (10–13) | 520 | 49.8% |
+| High (≥ 14) | 294 | 28.2% |
+
+So if a teacher asks *“How many students do I have?”* — in this demo: **1,044 total**, with **233 flagged as HIGH priority** for intervention.
 
 ---
 
@@ -85,7 +93,7 @@ It learned patterns such as:
 - Students with **many failures** are more at risk  
 - **High absences** often link to poor performance  
 
-The “brain” that learned these patterns is called **Random Forest** — it is about **86% accurate** on test data.
+The “brain” that learned these patterns is called **Random Forest** — it is **86.12% accurate** on the held-out test set (F1 score: 86.15%).
 
 **Important for your professor:**  
 This ML model is only **one part** of the AI agent — the **learning component**. It answers: *“What category is this student likely in?”*
@@ -140,7 +148,7 @@ Each row = one student, with columns like:
 
 The teacher can:
 
-- Sort by **HIGH priority** → see the **225** students needing urgent help  
+- Sort by **HIGH priority** → see the **233** students needing urgent help  
 - Focus on **Critical risk** students first  
 - Read specific recommendations per student  
 
@@ -164,7 +172,7 @@ Final exam grades (0–20) are grouped into:
 
 1. **Beginning of term / mid-term** — Upload or sync class roster  
 2. **System scores everyone** — A few seconds for 1,000+ students  
-3. **Teacher reviews HIGH priority list** — e.g. 225 students in the demo  
+3. **Teacher reviews HIGH priority list** — e.g. 233 students in the demo  
 4. **Teacher takes action** — counseling, tutoring, parent meetings  
 5. **Teacher uses judgment** — the system **advises**; the teacher **decides**  
 
@@ -207,7 +215,7 @@ Survey data ──┘         │                    ▼
 
 ## How to Explain It to Your Professor (30-Second Version)
 
-> “We built an intelligent **Student Performance Prediction Agent**. It uses data from **1,044 students** — age, study habits, absences, and prior grades — to predict whether each student will be a **Low**, **Medium**, or **High** performer. The machine learning model is the **learning component**; the full agent also includes a **decision engine** that assigns **risk levels** and **intervention priorities**. In our demo, **225 students** are flagged as **HIGH priority** for early intervention. The teacher receives a **dashboard** with recommendations such as counseling or tutoring — supporting decisions, not replacing the teacher.”
+> “We built an intelligent **Student Performance Prediction Agent**. It uses data from **1,044 students** — age, study habits, absences, and prior grades — to predict whether each student will be a **Low**, **Medium**, or **High** performer. The machine learning model is the **learning component**; the full agent also includes a **decision engine** that assigns **risk levels** and **intervention priorities**. In our demo, **233 students** are flagged as **HIGH priority** for early intervention. The teacher receives a **dashboard** with recommendations such as counseling or tutoring — supporting decisions, not replacing the teacher.”
 
 ---
 
@@ -217,7 +225,7 @@ Survey data ──┘         │                    ▼
 No. In the dataset, 1,044 is the **total across two subjects** (Math + Portuguese) and multiple school records. In a real school, a teacher might run the system for **their own class** (e.g. 30–40 students) — the software works the same way.
 
 **Q: Is the prediction always correct?**  
-No. It is about **86% accurate**. The teacher must always use professional judgment.
+No. It is **86.12% accurate** on the test set (~14% of predictions may be wrong). The teacher must always use professional judgment.
 
 **Q: Can it read minds or home problems?**  
 No. It only uses **recorded data**. Motivation and family stress are **hidden factors** — that is why we call the environment **partially observable** (Russell & Norvig).

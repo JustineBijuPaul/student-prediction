@@ -119,7 +119,7 @@
 **A:** Logistic Regression, Decision Tree, Random Forest, SVM, Gradient Boosting, Extra Trees, and XGBoost — seven classifiers total.
 
 ### Q36. Why did Random Forest win?
-**A:** Highest F1 (~0.86), strong ROC AUC (~0.95), stable cross-validation, handles non-linear feature interactions, provides feature importance, and fast inference.
+**A:** Highest F1 (86.15%), strong ROC AUC (94.61%), stable cross-validation (84.67% ± 1.95%), handles non-linear feature interactions, provides feature importance, and fast inference.
 
 ### Q37. What are Random Forest hyperparameters?
 **A:** n_estimators=200, max_depth=12, min_samples_split=5, min_samples_leaf=2, class_weight='balanced_subsample', random_state=42.
@@ -138,7 +138,7 @@
 ## Section D: Evaluation Metrics (41–48)
 
 ### Q41. What is accuracy?
-**A:** Proportion of correct predictions: (TP+TN)/Total. Our Random Forest achieves ~86% on the test set.
+**A:** Proportion of correct predictions: (TP+TN)/Total. Our Random Forest achieves **86.12%** on the test set (209 students).
 
 ### Q42. What is precision?
 **A:** Of all students predicted as Low (or any class), what fraction truly belong to that class: TP/(TP+FP). Important to avoid false alarms.
@@ -159,7 +159,7 @@
 **A:** Weighted precision/recall/F1 account for class imbalance by computing per-class metrics and averaging weighted by class support.
 
 ### Q48. Why is accuracy alone insufficient?
-**A:** With 50% High class, a naive "always predict High" model gets 50% accuracy but 0% recall for Low students. F1 and recall for minority class matter more.
+**A:** With 28.2% High class, a naive "always predict High" model gets limited accuracy but poor recall for Low students. F1 and recall for minority class matter more.
 
 ---
 

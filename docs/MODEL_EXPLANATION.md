@@ -19,17 +19,17 @@ This is not unsupervised (no labels), not reinforcement learning (no sequential 
 
 From our comparison of 7 algorithms on the held-out test set:
 
-| Model | F1 Score | ROC AUC |
-|-------|----------|---------|
-| **Random Forest** | **~0.86** | **~0.95** |
-| Logistic Regression | ~0.85 | ~0.95 |
-| XGBoost | ~0.85 | ~0.95 |
-| Decision Tree | ~0.85 | ~0.94 |
-| Gradient Boosting | ~0.84 | ~0.95 |
-| SVM | ~0.82 | ~0.93 |
-| Extra Trees | ~0.75 | ~0.89 |
+| Model | F1 Score | Accuracy | ROC AUC |
+|-------|----------|----------|---------|
+| **Random Forest** | **0.8615** | **0.8612** | **0.9461** |
+| Logistic Regression | 0.8516 | 0.8517 | 0.9500 |
+| XGBoost | 0.8468 | 0.8469 | 0.9546 |
+| Decision Tree | 0.8467 | 0.8469 | 0.9356 |
+| Gradient Boosting | 0.8371 | 0.8373 | 0.9514 |
+| Support Vector Machine | 0.8220 | 0.8230 | 0.9342 |
+| Extra Trees | 0.7525 | 0.7560 | 0.8931 |
 
-**Random Forest** achieved the highest F1 with strong stability across 5-fold cross-validation.
+**Random Forest** achieved the highest F1 with stable 5-fold cross-validation (CV accuracy: 84.67% ± 1.95%).
 
 ---
 
@@ -119,11 +119,12 @@ Raw Features
 
 | Metric | Value | Meaning |
 |--------|-------|---------|
-| **Accuracy** | ~86% | Correct predictions overall |
-| **Precision** | ~86% | When agent says Low, usually correct |
-| **Recall** | ~86% | Agent catches most actual Low students |
-| **F1** | ~86% | Harmonic mean — balances precision/recall |
-| **ROC AUC** | ~95% | Strong class separability |
+| **Accuracy** | 86.12% | Correct predictions overall |
+| **Precision** | 86.36% | When agent says Low, usually correct |
+| **Recall** | 86.12% | Agent catches most actual Low students |
+| **F1** | 86.15% | Harmonic mean — balances precision/recall |
+| **ROC AUC** | 94.61% | Strong class separability |
+| **CV Accuracy** | 84.67% ± 1.95% | Stable across 5-fold validation |
 
 **Why F1 for selection?** Class imbalance makes accuracy misleading; F1 weights Low class performance.
 

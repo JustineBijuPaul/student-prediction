@@ -58,7 +58,7 @@ Replace [Your Name], [Group], and [University] before presenting.
 >
 > Second, **distributions**: Most students score between 10 and 14 on a 0–20 scale. Absences are right-skewed.
 >
-> Third, **class imbalance**: only about 15 percent are Low performers — so we used stratified splitting and balanced class weights.
+> Third, **class imbalance**: about **22 percent** are Low performers, **50 percent** Medium, and **28 percent** High — so we used stratified splitting and balanced class weights.
 >
 > The heatmap and pairplot on screen show these relationships visually. Study time and absences clearly separate performance clusters."
 
@@ -72,7 +72,7 @@ Replace [Your Name], [Group], and [University] before presenting.
 >
 > **Random Forest** won with hyperparameters: 200 trees, max depth 12, balanced class weights, random state 42.
 >
-> The bar chart compares all models. Random Forest achieved the highest F1 score at approximately **86 percent**, with strong cross-validation stability.
+> The bar chart compares all models. Random Forest achieved the highest F1 score at **86.15 percent**, with CV accuracy of **84.67 percent**.
 >
 > We chose Random Forest over Logistic Regression because it captures non-linear interactions — like failures combined with absences — without manual feature engineering."
 
@@ -80,7 +80,9 @@ Replace [Your Name], [Group], and [University] before presenting.
 
 ## Slide 6: Results (~45 sec)
 
-> "On the held-out test set, Random Forest achieved **86 percent accuracy**, **86 percent precision**, **86 percent recall**, and **86 percent F1 score**. ROC AUC is approximately **95 percent**.
+> "On the held-out test set of **209 students**, Random Forest achieved **86.12 percent accuracy**, **86.36 percent precision**, **86.12 percent recall**, and **86.15 percent F1 score**. ROC AUC is **94.61 percent**.
+>
+> The teacher dashboard scores all **1,044 students** — **233 flagged HIGH priority**, **525 MEDIUM**, and **286 LOW**.
 >
 > The confusion matrix shows a strong diagonal — most predictions are correct. Main errors occur at the Medium–High boundary near grade 14.
 >

@@ -51,13 +51,13 @@ Sensors → Percepts → Preprocess → ML Model → Decision Engine → Actions
 
 ## Key Metrics (Random Forest)
 
-| Metric | ~Value |
-|--------|--------|
-| Accuracy | 86% |
-| Precision | 86% |
-| Recall | 86% |
-| F1 | 86% |
-| ROC AUC | 95% |
+| Metric | Value |
+|--------|-------|
+| Accuracy | 86.12% |
+| Precision | 86.36% |
+| Recall | 86.12% |
+| F1 | 86.15% |
+| ROC AUC | 94.61% |
 
 **F1** = 2×(Precision×Recall)/(Precision+Recall) — used for model selection due to class imbalance.
 
@@ -109,9 +109,18 @@ python main.py --dashboard  # Batch teacher CSV
 
 | Category | G3 Range | Action |
 |----------|----------|--------|
-| Low | 0–9 | HIGH priority intervention |
-| Medium | 10–13 | Monitor + study plan |
-| High | 14–20 | Enrichment / peer tutor |
+| Low | 0–9 | HIGH priority (~233 students in dashboard) |
+| Medium | 10–13 | Monitor (~525 students) |
+| High | 14–20 | Enrichment (~286 students) |
+
+## Dashboard Summary (1,044 students)
+
+| Output | Count |
+|--------|-------|
+| HIGH priority | 233 |
+| MEDIUM priority | 525 |
+| LOW priority | 286 |
+| Critical risk | 270 |
 
 ---
 

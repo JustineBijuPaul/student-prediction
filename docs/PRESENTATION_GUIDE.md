@@ -126,7 +126,8 @@ Study these documents in order:
 | Problem | Solution |
 |---------|----------|
 | Projector fails | Walk through `CHEAT_SHEET.md` verbally |
-| Forgot metric | Say "approximately 86% F1" from Random Forest |
+| Forgot metric | Say "86.15% F1, 86.12% accuracy" from Random Forest |
+| Dashboard size | 1,044 students; 233 HIGH priority |
 | Tough viva question | Refer to `docs/` — offer to show diagram |
 | Demo fails | Describe `main.py --predict` output from docs |
 
