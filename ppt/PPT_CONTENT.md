@@ -100,7 +100,7 @@ Sample data table + UCI logo + sensor diagram (SIS → Agent).
 
 ### Distributions
 - G3: approximately normal, centered at 12
-- Performance categories: 15% Low, 35% Medium, 50% High
+- Performance categories: Low 22% · Medium 50% · High 28%
 
 ### Charts (insert images)
 1. `outputs/correlation_heatmap.png`

@@ -86,7 +86,20 @@ Sensors (SIS/LMS) → Percepts → Preprocessor → ML Classifier
 
 See [docs/AI_AGENT_DESIGN.md](docs/AI_AGENT_DESIGN.md) for Mermaid diagrams and full design.
 
-## Documentation
+## Presentation
+
+| File | Description |
+|------|-------------|
+| `ppt/Student_Performance_Prediction_Agent.pptx` | Ready-to-present PowerPoint (7 slides) |
+| `ppt/PPT_CONTENT.md` | Slide text reference |
+| `scripts/build_presentation.py` | Regenerate PPT from template |
+
+```bash
+# Regenerate presentation after updating outputs or metrics
+python scripts/build_presentation.py
+```
+
+Edit `STUDENT_NAME`, `SEMESTER`, and `GROUP` at the top of `scripts/build_presentation.py` before presenting.
 
 | Document | Description |
 |----------|-------------|
