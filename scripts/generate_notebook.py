@@ -414,7 +414,16 @@ plt.savefig('../outputs/class_distribution.png', dpi=150, bbox_inches='tight')
 plt.show()
 
 # Save model artifact
-artifact = {'model': best_model, 'preprocessor': preprocessor, 'label_encoder': le, 'best_model_name': best_name}
+artifact = {
+    'model': best_model,
+    'preprocessor': preprocessor,
+    'target_encoder': le,
+    'label_encoder': le,
+    'input_columns': list(FEATURES),
+    'numeric_columns': num_f,
+    'categorical_columns': cat_f,
+    'best_model_name': best_name,
+}
 joblib.dump(artifact, '../models/best_model.pkl')
 comparison.to_csv('../outputs/model_comparison.csv', index=False)
 print('Artifacts saved to ../outputs/ and ../models/')

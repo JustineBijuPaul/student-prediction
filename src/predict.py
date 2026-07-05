@@ -84,6 +84,30 @@ class StudentPerformanceAgent:
             self.load()
         return self._artifact  # type: ignore[return-value]
 
+    def _get_input_columns(self) -> List[str]:
+        """Return training feature column order from artifact or fitted preprocessor."""
+        if "input_columns" in self.artifact:
+            return list(self.artifact["input_columns"])
+
+        preprocessor = self.artifact["preprocessor"]
+        if hasattr(preprocessor, "feature_names_in_"):
+            return list(preprocessor.feature_names_in_)
+
+        columns: List[str] = []
+        for _, _, cols in preprocessor.transformers_:
+            columns.extend(list(cols))
+        return columns
+
+    def _get_target_encoder(self) -> Any:
+        """Return label encoder saved by train.py or the Kaggle notebook."""
+        if "target_encoder" in self.artifact:
+            return self.artifact["target_encoder"]
+        if "label_encoder" in self.artifact:
+            return self.artifact["label_encoder"]
+        raise KeyError(
+            "Model artifact missing target encoder. Retrain with: python main.py --train"
+        )
+
     def _get_column_types(self) -> tuple[List[str], List[str]]:
         """Return numeric and categorical column lists from artifact or preprocessor."""
         if "numeric_columns" in self.artifact and "categorical_columns" in self.artifact:
@@ -112,7 +136,7 @@ class StudentPerformanceAgent:
             if col in df.columns:
                 df = df.drop(columns=[col])
 
-        expected = self.artifact["input_columns"]
+        expected = self._get_input_columns()
         numeric_cols, categorical_cols = self._get_column_types()
 
         for col in expected:
@@ -143,7 +167,7 @@ class StudentPerformanceAgent:
         X = self.artifact["preprocessor"].transform(df)
 
         model = self.artifact["model"]
-        encoder = self.artifact["target_encoder"]
+        encoder = self._get_target_encoder()
 
         pred_idx = model.predict(X)
         proba = model.predict_proba(X) if hasattr(model, "predict_proba") else None
@@ -231,7 +255,7 @@ class StudentPerformanceAgent:
         X = self.artifact["preprocessor"].transform(processed)
 
         model = self.artifact["model"]
-        encoder = self.artifact["target_encoder"]
+        encoder = self._get_target_encoder()
         pred_idx = model.predict(X)
         proba = model.predict_proba(X) if hasattr(model, "predict_proba") else None
         class_labels = list(encoder.classes_)
