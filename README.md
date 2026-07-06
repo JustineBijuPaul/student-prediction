@@ -122,6 +122,4 @@ MIT — see [LICENSE](LICENSE).
 
 ## Author
 
-**[Your Name]** — AI Final Examination, [Semester/Year], [University]
-
-Replace placeholder name/group details in `ppt/PPT_CONTENT.md` and notebook header before submission.
+**Justine Biju Paul** 
